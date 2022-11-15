@@ -103,12 +103,10 @@ class ZootovaryParser:
         formatter = logging.Formatter(fmt=strfmt, datefmt=datefmt)
 
         stdout_handler = logging.StreamHandler()
-        # stdout_handler.setLevel(logging.INFO)
         stdout_handler.setFormatter(formatter)
 
         error_log_path = os.path.join(self.config.get('logs_dir'), self.log_error_file_name)
         error_file_handler = logging.FileHandler(error_log_path)
-        # error_file_handler.setLevel(logging.ERROR)
         error_file_handler.setFormatter(formatter)
 
         error_logger.addHandler(error_file_handler)
@@ -116,7 +114,6 @@ class ZootovaryParser:
 
         event_log_path = os.path.join(self.config.get('logs_dir'), self.log_event_file_name)
         event_file_handler = logging.FileHandler(event_log_path)
-        # event_file_handler.setLevel(logging.INFO)
         event_file_handler.setFormatter(formatter)
         event_logger.addHandler(event_file_handler)
 
@@ -305,7 +302,6 @@ class ZootovaryParser:
         if not source:
             event_logger.warning(f'NO SOURCE IN: {url}')
             return
-        # self.write_file(source, 'items.html')
         soup = BeautifulSoup(source, 'lxml')
         # получаем данные о товарах на первой странице
         self._extract_items(soup)
@@ -338,7 +334,6 @@ class ZootovaryParser:
 
         :param item_url: ссылка на товар
         """
-        # print(item_url)
         source = self._get_source(item_url)
         if not source:
             event_logger.warning(f'NO SOURCE IN: {item_url}')
