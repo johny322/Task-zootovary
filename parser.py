@@ -98,7 +98,7 @@ class ZootovaryParser:
         # Обычно пишу свою функцию для записи в файл лога об ошибках файл, например функция _log_error,
         # которую оставил, как пример
 
-        strfmt = '[%(asctime)s] [%(levelname)s] %(message)s'
+        strfmt = '[%(asctime)s] [%(levelname)-8s] --- %(message)s (%(filename)s:%(funcName)s:%(lineno)s)'
         datefmt = '%Y-%m-%d %H:%M:%S'
         formatter = logging.Formatter(fmt=strfmt, datefmt=datefmt)
 
@@ -238,7 +238,7 @@ class ZootovaryParser:
         :return: список словарей с данными о категориях
         """
         cats_data = []
-        source = self._get_source(self.domain, path='start_page.html')
+        source = self._get_source(self.domain)
         if not source:
             event_logger.warning(f'NO SOURCE IN: {self.domain}')
             return
